@@ -44,7 +44,9 @@ const Edit = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(editdata(adData, id));
-    toast.success("User Succesfully Updated");
+    setTimeout(() => {
+      toast.success("User Succesfully Updated");
+    }, 1000);
     setTimeout(() => {
       window.location.href = "/add_users";
     }, 2000);
