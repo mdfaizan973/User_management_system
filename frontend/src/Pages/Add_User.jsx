@@ -12,6 +12,7 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
+import TableShow from "./TableShow";
 
 const Add_User = () => {
   return (
@@ -71,6 +72,8 @@ const Add_User = () => {
           </VStack>
         </Box>
       </Stack>
+
+      <TableShow />
     </Container>
   );
 };
