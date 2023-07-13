@@ -15,7 +15,7 @@ import {
 export const addUserstData = (adData) => (dispatch) => {
   dispatch(req_users());
   axios
-    .post("http://localhost:4500/users/postuser", adData)
+    .post("https://usermanagement-9gy2.onrender.com/users/postuser", adData)
     .then((res) => {
       //   console.log(res);
       dispatch(add_users());
@@ -31,7 +31,7 @@ export const usersData = (dispatch) => {
   // Complete get products functionality here
   dispatch(req_users());
   axios
-    .get(`http://localhost:4500/users/getuser`)
+    .get(`https://usermanagement-9gy2.onrender.com/users/getuser`)
     .then((res) => {
       // console.log(res);
       dispatch(suc_users(res.data));
@@ -47,7 +47,7 @@ export const deleteUsers = (id) => (dispatch) => {
   dispatch(req_users());
 
   axios
-    .delete(`http://localhost:4500/users/deleteuser/${id}`)
+    .delete(`https://usermanagement-9gy2.onrender.com/users/deleteuser/${id}`)
     .then((res) => {
       dispatch({ type: DELELE_USERS_SUCCESS });
     })
@@ -61,7 +61,10 @@ export const deleteUsers = (id) => (dispatch) => {
 export const editdata = (dataobj, id) => (dispatch) => {
   dispatch(req_users());
   axios
-    .patch(`http://localhost:4500/users/updateuser/${id}`, dataobj)
+    .patch(
+      `https://usermanagement-9gy2.onrender.com/users/updateuser/${id}`,
+      dataobj
+    )
     .then((res) => {
       dispatch({ type: PATCH_USERS_SUCCSESS });
     })

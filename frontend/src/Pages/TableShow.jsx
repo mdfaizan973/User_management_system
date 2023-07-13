@@ -60,7 +60,7 @@ const TableShow = () => {
         </chakra.h3>
       </Flex>
 
-      {users.map((ele, i) => (
+      {users.reverse().map((ele, i) => (
         <VStack
           key={ele._id}
           border="1px solid"
