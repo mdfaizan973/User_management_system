@@ -26,6 +26,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { deleteUsers, usersData } from "../Redux/UserReducer/action";
 import { toast } from "react-toastify";
+import Add_User from "./Add_User";
 const TableShow = () => {
   const { users } = useSelector((store) => store.userReducer); // getting data
   // console.log(users);
@@ -44,6 +45,13 @@ const TableShow = () => {
     }, 2000);
     // console.log(id);
   };
+
+  const handleEdit = (id) => {
+    // console.log(id);
+
+    toast.success("Look at your form");
+  };
+
   return (
     <Container maxW="5xl" p={{ base: 5, md: 10 }}>
       <Flex justify="left" mb={3}>
@@ -99,9 +107,15 @@ const TableShow = () => {
                     <FaRegEye /> - View
                   </Button>
                 </RouterLink>
-                <Button colorScheme="blue">
-                  <FaEdit /> - Edit
-                </Button>
+                <RouterLink to={`/add_users/${ele._id}`}>
+                  <Button
+                    colorScheme="blue"
+                    onClick={() => handleEdit(ele._id)}
+                  >
+                    <FaEdit /> - Edit
+                  </Button>
+                </RouterLink>
+
                 <Button colorScheme="red" onClick={() => handleDelete(ele._id)}>
                   <FaBitbucket /> - Delete
                 </Button>

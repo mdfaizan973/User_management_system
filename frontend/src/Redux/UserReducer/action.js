@@ -57,23 +57,18 @@ export const deleteUsers = (id) => (dispatch) => {
 };
 
 // update the users
-
-// SINGLE DATA
-// export const userdetails = (id) => (dispatch) => {
-//   console.log(id);
-// dispatch(req_users());
-// axios
-//   .get(`http://localhost:4500/users/getuser/${id}`)
-//   .then((res) => {
-//     //   console.log(res);
-//     dispatch(single_users());
-//   })
-//   .catch((err) => {
-//     //   console.log(err);
-//     dispatch(fai_users());
-//   });
-// };
-
+// /updateuser/:id
+export const editdata = (dataobj, id) => (dispatch) => {
+  dispatch(req_users());
+  axios
+    .patch(`http://localhost:4500/users/updateuser/${id}`, dataobj)
+    .then((res) => {
+      dispatch({ type: PATCH_USERS_SUCCSESS });
+    })
+    .catch((err) => {
+      dispatch(fai_users());
+    });
+};
 export const req_users = () => {
   return { type: USRES_REQUEST_PENDING };
 };

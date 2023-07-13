@@ -14,9 +14,11 @@ import {
 } from "@chakra-ui/react";
 import TableShow from "./TableShow";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addUserstData, editdata } from "../Redux/UserReducer/action";
 import { toast } from "react-toastify";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 const initialState = {
   name: "",
@@ -24,11 +26,14 @@ const initialState = {
   phone: "",
 };
 
-const Add_User = (id) => {
-  console.log(id);
+const Edit = () => {
+  const { id } = useParams();
   const [adData, setAddData] = useState(initialState);
-  const [edata, setEdata] = useState(initialState);
+  const { users } = useSelector((store) => store.userReducer); // getting data
+  console.log(users);
+
   const dispatch = useDispatch();
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setAddData((prev) => {
@@ -36,21 +41,21 @@ const Add_User = (id) => {
     });
   };
 
-  const handleSubmit = (e, id) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    if (adData.name === "" || adData.email === "" || adData.phone === "") {
-      toast.error("You are missing something");
-      return;
-    } else {
-      //----
-      toast.success("User has successfully Added");
-      dispatch(addUserstData(adData));
-      setAddData(initialState);
-      setTimeout(() => {
-        window.location.reload();
-      }, 2000);
-    }
+    dispatch(editdata(adData, id));
+    toast.success("User Succesfully Updated");
+    setTimeout(() => {
+      window.location.href = "/add_users";
+    }, 2000);
   };
+
+  useEffect(() => {
+    const edata = users.find((ele) => ele._id == id);
+    setAddData(edata);
+  }, []);
+
+  //   console.log(adData);
   return (
     <Container maxW="5xl" mt={"100px"} p={{ base: 5, md: 10 }}>
       <Stack spacing={4} maxW={{ base: "20rem", sm: "25rem" }} margin="0 auto">
@@ -83,7 +88,7 @@ const Add_User = (id) => {
                 type="text"
                 placeholder="Enter Name"
                 name="name"
-                onChange={(e) => handleChange(e)}
+                onChange={handleChange}
                 value={adData.name}
                 rounded="md"
               />
@@ -95,7 +100,7 @@ const Add_User = (id) => {
                 type="email"
                 placeholder="Enter email"
                 name="email"
-                onChange={(e) => handleChange(e)}
+                onChange={handleChange}
                 value={adData.email}
                 rounded="md"
               />
@@ -107,7 +112,7 @@ const Add_User = (id) => {
                 type="number"
                 placeholder="Enter Phone"
                 name="phone"
-                onChange={(e) => handleChange(e)}
+                onChange={handleChange}
                 value={adData.phone}
                 rounded="md"
               />
@@ -133,4 +138,4 @@ const Add_User = (id) => {
   );
 };
 
-export default Add_User;
+export default Edit;
