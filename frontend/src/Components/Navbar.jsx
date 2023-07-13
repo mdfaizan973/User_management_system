@@ -15,6 +15,7 @@ import {
   Button,
   useColorMode,
 } from "@chakra-ui/react";
+import { Link as RouterLink } from "react-router-dom";
 import { FaGithub } from "react-icons/fa";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 const GITHUB_REPO_LINK = "https://github.com/MA-Ahmad/templateskart";
@@ -87,6 +88,10 @@ export default function Navbar() {
               </Link>
             </HStack>
             <HStack spacing={2} alignItems="center">
+              <RouterLink to="/add_users">
+                <Button colorScheme="blue">Add User</Button>
+              </RouterLink>
+
               <Button onClick={toggleColorMode}>
                 {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
               </Button>
