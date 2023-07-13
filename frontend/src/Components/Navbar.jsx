@@ -18,7 +18,6 @@ import {
 import { Link as RouterLink } from "react-router-dom";
 import { FaGithub } from "react-icons/fa";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
-const GITHUB_REPO_LINK = "https://github.com/MA-Ahmad/templateskart";
 
 export default function Navbar() {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -56,32 +55,34 @@ export default function Navbar() {
                 >
                   <Flex position="relative">
                     <HStack d={{ base: "none", sm: "flex" }} spacing={2}>
-                      <Text textShadow="1px 2px #179c40">
-                        UserMana
-                        <Box
-                          as="span"
-                          position="relative"
-                          _before={{
-                            content: '""',
-                            bg: linkColor,
-                            position: "absolute",
-                            top: "-0.15rem",
-                            right: "-0.15rem",
-                            bottom: "-0.15rem",
-                            left: "-0.15rem",
-                            transform: "rotate(-4deg)",
-                          }}
-                        >
+                      <RouterLink to="/">
+                        <Text textShadow="1px 2px #179c40">
+                          UserMana
                           <Box
                             as="span"
-                            textShadow="1px 2px #179c40"
-                            color={useColorModeValue("white", "black")}
                             position="relative"
+                            _before={{
+                              content: '""',
+                              bg: linkColor,
+                              position: "absolute",
+                              top: "-0.15rem",
+                              right: "-0.15rem",
+                              bottom: "-0.15rem",
+                              left: "-0.15rem",
+                              transform: "rotate(-4deg)",
+                            }}
                           >
-                            gementSystem
+                            <Box
+                              as="span"
+                              textShadow="1px 2px #179c40"
+                              color={useColorModeValue("white", "black")}
+                              position="relative"
+                            >
+                              gementSystem
+                            </Box>
                           </Box>
-                        </Box>
-                      </Text>
+                        </Text>
+                      </RouterLink>
                     </HStack>
                   </Flex>
                 </Heading>
