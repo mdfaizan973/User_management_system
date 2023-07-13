@@ -16,6 +16,7 @@ import TableShow from "./TableShow";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addUserstData } from "../Redux/UserReducer/action";
+import { toast } from "react-toastify";
 
 const initialState = {
   name: "",
@@ -35,8 +36,17 @@ const Add_User = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(addUserstData(adData));
-    setAddData(initialState);
+    if (adData.name === "" || adData.email === "" || adData.phone === "") {
+      toast.error("You are missing something");
+      return;
+    } else {
+      toast.success("User has successfully Added");
+      dispatch(addUserstData(adData));
+      setAddData(initialState);
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
+    }
   };
   return (
     <Container maxW="5xl" mt={"100px"} p={{ base: 5, md: 10 }}>

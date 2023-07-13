@@ -38,17 +38,8 @@ const Home = () => {
               p={4}
               border="1px solid"
               key={ele._id}
-              // borderColor={useColorModeValue("gray.400", "gray.600")}
               rounded="md"
               margin="0 auto"
-              _hover={
-                {
-                  // boxShadow: useColorModeValue(
-                  //   "0 4px 6px rgba(160, 174, 192, 0.6)",
-                  //   "0 4px 6px rgba(9, 17, 28, 0.4)"
-                  // ),
-                }
-              }
             >
               <HStack justifyContent="space-between" alignItems="baseline">
                 <Tooltip
@@ -68,7 +59,7 @@ const Home = () => {
                 </Tooltip>
               </HStack>
               <chakra.h1 fontSize="xl" fontWeight="bold">
-                Name : {ele.name}
+                Name : {ele.name.toUpperCase()}
               </chakra.h1>
               <Text fontSize="md" color="gray.500">
                 Phone : {ele.phone}

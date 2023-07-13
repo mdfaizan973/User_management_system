@@ -10,7 +10,7 @@ export default function All_Routes() {
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/add_users" element={<Add_User />}></Route>
-        <Route path="/details" element={<Details />}></Route>
+        <Route path="/details/:id" element={<Details />}></Route>
         <Route path="*" element={<Not_Found />}></Route>
       </Routes>
     </div>

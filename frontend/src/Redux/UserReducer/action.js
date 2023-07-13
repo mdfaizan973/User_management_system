@@ -5,6 +5,7 @@ import {
   USRES_REQUEST_FAILURE,
   USRES_REQUEST_SUCCESS,
   ADD_USERS_SUCCSESS,
+  SINGLE_USERS_SUCCESS,
   PATCH_USERS_SUCCSESS,
   DELELE_USERS_SUCCESS,
 } from "./actionTypes";
@@ -55,6 +56,24 @@ export const deleteUsers = (id) => (dispatch) => {
     });
 };
 
+// update the users
+
+// SINGLE DATA
+// export const userdetails = (id) => (dispatch) => {
+//   console.log(id);
+// dispatch(req_users());
+// axios
+//   .get(`http://localhost:4500/users/getuser/${id}`)
+//   .then((res) => {
+//     //   console.log(res);
+//     dispatch(single_users());
+//   })
+//   .catch((err) => {
+//     //   console.log(err);
+//     dispatch(fai_users());
+//   });
+// };
+
 export const req_users = () => {
   return { type: USRES_REQUEST_PENDING };
 };
@@ -66,4 +85,7 @@ export const fai_users = () => {
 };
 export const add_users = () => {
   return { type: ADD_USERS_SUCCSESS };
+};
+export const single_users = () => {
+  return { type: SINGLE_USERS_SUCCESS };
 };

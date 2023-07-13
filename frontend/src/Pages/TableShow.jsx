@@ -25,6 +25,7 @@ import {
 } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteUsers, usersData } from "../Redux/UserReducer/action";
+import { toast } from "react-toastify";
 const TableShow = () => {
   const { users } = useSelector((store) => store.userReducer); // getting data
   // console.log(users);
@@ -37,6 +38,10 @@ const TableShow = () => {
 
   const handleDelete = (id) => {
     dispatch(deleteUsers(id));
+    toast.error("User deleted successfully");
+    setTimeout(() => {
+      window.location.reload();
+    }, 2000);
     // console.log(id);
   };
   return (
@@ -89,7 +94,7 @@ const TableShow = () => {
                 justifySelf="flex-end"
                 alignItems="center"
               >
-                <RouterLink to={"/details"}>
+                <RouterLink to={`/details/${ele._id}`}>
                   <Button colorScheme="green">
                     <FaRegEye /> - View
                   </Button>
