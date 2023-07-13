@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 import {
   Container,
   Box,
@@ -23,8 +23,22 @@ import {
   FaEdit,
   FaBitbucket,
 } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteUsers, usersData } from "../Redux/UserReducer/action";
 const TableShow = () => {
-  let a = [1, 2, 3, 4, 5];
+  const { users } = useSelector((store) => store.userReducer); // getting data
+  // console.log(users);
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    // dispatch(usersData());
+    usersData(dispatch);
+  }, []);
+
+  const handleDelete = (id) => {
+    dispatch(deleteUsers(id));
+    // console.log(id);
+  };
   return (
     <Container maxW="5xl" p={{ base: 5, md: 10 }}>
       <Flex justify="left" mb={3}>
@@ -33,8 +47,9 @@ const TableShow = () => {
         </chakra.h3>
       </Flex>
 
-      {a.map((ele, i) => (
+      {users.map((ele, i) => (
         <VStack
+          key={ele._id}
           border="1px solid"
           borderColor="gray.400"
           rounded="md"
@@ -52,7 +67,7 @@ const TableShow = () => {
             >
               <Box gridColumnEnd={{ base: "span 2", md: "unset" }}>
                 <chakra.h3 isExternal fontWeight="bold" fontSize="lg">
-                  1
+                  {ele._id}
                 </chakra.h3>
                 <chakra.p fontWeight="medium" fontSize="sm"></chakra.p>
               </Box>
@@ -64,7 +79,7 @@ const TableShow = () => {
                 // color={useColorModeValue("gray.600", "gray.300")}
               >
                 <chakra.h3 isExternal fontWeight="bold" fontSize="lg">
-                  Md Faizan
+                  {ele.name.toUpperCase()}
                 </chakra.h3>
               </HStack>
               <Stack
@@ -82,7 +97,7 @@ const TableShow = () => {
                 <Button colorScheme="blue">
                   <FaEdit /> - Edit
                 </Button>
-                <Button colorScheme="red">
+                <Button colorScheme="red" onClick={() => handleDelete(ele._id)}>
                   <FaBitbucket /> - Delete
                 </Button>
               </Stack>

@@ -13,16 +13,36 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import TableShow from "./TableShow";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addUserstData } from "../Redux/UserReducer/action";
+
+const initialState = {
+  name: "",
+  email: "",
+  phone: "",
+};
 
 const Add_User = () => {
+  const [adData, setAddData] = useState(initialState);
+  const dispatch = useDispatch();
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setAddData((prev) => {
+      return { ...prev, [name]: value };
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(addUserstData(adData));
+    setAddData(initialState);
+  };
   return (
     <Container maxW="5xl" mt={"100px"} p={{ base: 5, md: 10 }}>
       <Stack spacing={4} maxW={{ base: "20rem", sm: "25rem" }} margin="0 auto">
         <Stack align="center" spacing={2}>
           <Heading fontSize={{ base: "xl", sm: "3xl" }}>ADD USERS</Heading>
-          {/* <Text fontSize={{ base: "sm", sm: "md" }}>
-            Send a magic link with your email below
-          </Text> */}
         </Stack>
         <Box pos="relative">
           <Box
@@ -46,17 +66,38 @@ const Add_User = () => {
           >
             <FormControl id="email">
               <FormLabel>Name</FormLabel>
-              <Input type="text" placeholder="Enter Name" rounded="md" />
+              <Input
+                type="text"
+                placeholder="Enter Name"
+                name="name"
+                onChange={(e) => handleChange(e)}
+                value={adData.name}
+                rounded="md"
+              />
             </FormControl>
 
             <FormControl id="email">
               <FormLabel>Email address</FormLabel>
-              <Input type="email" placeholder="Enter email" rounded="md" />
+              <Input
+                type="email"
+                placeholder="Enter email"
+                name="email"
+                onChange={(e) => handleChange(e)}
+                value={adData.email}
+                rounded="md"
+              />
             </FormControl>
 
             <FormControl id="email">
               <FormLabel>Phone Number</FormLabel>
-              <Input type="number" placeholder="Enter Phone" rounded="md" />
+              <Input
+                type="number"
+                placeholder="Enter Phone"
+                name="phone"
+                onChange={(e) => handleChange(e)}
+                value={adData.phone}
+                rounded="md"
+              />
             </FormControl>
             <Button
               bg="blue.400"
@@ -66,6 +107,7 @@ const Add_User = () => {
               }}
               rounded="md"
               w="100%"
+              onClick={handleSubmit}
             >
               Submit
             </Button>
